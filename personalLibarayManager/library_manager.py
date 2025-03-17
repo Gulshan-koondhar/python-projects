@@ -18,7 +18,7 @@ def save_books(books):
         print(f"Error saving books: {e}")
 
 def add_book():
-    title = input("Enter the title of the book: ")
+    title = input("\nEnter the title of the book: ")
     author = input("Enter the author of the book: ")
     year = int(input("Enter the year of the book: "))
     genre = input("Enter the genre of the book: ")
@@ -40,29 +40,39 @@ def add_book():
     print(f"Book added: {title} by {author} successfully!")
 
 def remove_book():
-    title = input("Enter the title of the book: ")
+    title = input("\nEnter the title of the book: ")
     books = load_books()
     for book in books:
         if book["title"] == title:
             books.remove(book)  
             save_books(books)
             print(f"Book '{title}' removed successfully: ")
-    print(f"Book not found: {title}")
+            break
+    else:
+        print(f"Book not found: {title}")
+   
     
 def search_book():
-    search_type = input("Enter 1 to search by title, 2 to search by author: ")
+    search_type = input("\nEnter 1 to search by title, 2 to search by author: ")
     if search_type == "1":
         title = input("Enter the title of the book: ")
         books = load_books()
         for book in books:
             if book["title"].lower() == title.lower():
                 print(f"Book found: {book['title']} by {book['author']} ({book['year']}) - {book['genre']} - {book['status']}")
+                break
+        else:
+            print(f"Book not found: {title}")
+        
     elif search_type == "2":
         author = input("Enter the author of the book: ")
         books = load_books()
         for book in books:
             if book["author"].lower() == author.lower():
                 print(f"Book found: {book['title']} by {book['author']} ({book['year']}) - {book['genre']} - {book['status']}")
+                break
+        else:
+            print(f"Book written by {author} not found!")
     else:
         print("Invalid search type. Please enter 1 or 2.")
 
@@ -71,9 +81,11 @@ def view_books():
     if not books:
         print("No books in the library.")
         return
-    print("\nLibrary Catalog:")
+    print("\nLibrary Catalog:\n")
+    i=0
     for book in books:
-        print(f"{book['title']} by {book['author']} ({book['year']}) - {book['genre']} - {book['status']}")
+        print(f"{i+1}. {book['title']} by {book['author']} ({book['year']}) - {book['genre']} - {book['status']}")
+        i += 1
 
 def display_statistics():
     books = load_books()
@@ -85,7 +97,7 @@ def display_statistics():
         if book["status"].lower() == "read":
             read += 1
     percentage_read = read / total_books * 100
-    print(f"Total books: {total_books}")
+    print(f"\nTotal books: {total_books}")
     print(f"Percentage of books read: {percentage_read:.2f}%")
 
 def main():
@@ -97,7 +109,7 @@ def main():
         print("4. View all books")
         print("5. Display Statistics")
         print("6. Exit")
-        choice = input("Enter your choice: ")
+        choice = input("\nEnter your choice: ")
         if choice == "1":
             add_book()
         elif choice == "2":
@@ -109,7 +121,7 @@ def main():
         elif choice == "5":
             display_statistics()
         elif choice == "6":
-            print("==== Library saved to file. Goodbye!+ ====")
+            print("\n==== Library saved to file. Goodbye!+ ====")
             break
 
 if __name__ == "__main__":
