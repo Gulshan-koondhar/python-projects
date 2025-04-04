@@ -12,3 +12,8 @@ st.success(f"The BMi is {bmi:.2f}")
 
 
 
+
+st.write("link: https://bmi-calculator-01.streamlit.app/")
+
+
+
