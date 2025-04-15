@@ -67,6 +67,7 @@ def check_lockout():
     return False
 
 # --- UI ---
+st.set_page_config("Secure Data Encryption and Decryption System", "🛡️" )
 st.title("🛡️ Secure Data Encryption System")
 
 menu = ["Home", "Store Data", "Retrieve Data", "Login"]
